@@ -12,5 +12,13 @@ class User < ActiveRecord::Base
   validates :city, presence: true
   validates :monthly_salary_range, presence: true
 
+  after_create :setup_country
+
+
+  private
+
+    def setup_country
+      self.update_attributes(country: "FR")
+    end
 
 end

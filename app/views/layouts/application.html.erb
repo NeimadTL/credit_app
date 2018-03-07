@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>CreditApp</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
 
-<%= yield %>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CreditApp</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-</body>
+  <body>
+
+    <% if notice.present? %>
+      <p class="text-success"><%= notice %></p>
+    <% end %>
+
+  	<% if alert.present? %>
+      <p class="text-danger"><%= alert %></p>
+  	<% end %>
+
+    <%= yield %>
+
+  </body>
+
 </html>

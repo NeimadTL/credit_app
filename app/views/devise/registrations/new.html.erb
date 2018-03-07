@@ -3,27 +3,47 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <!-- added -->
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
+  <%= f.radio_button :title, "Mr" %>
+  <%= f.label :title, "Mr", class: "form-check-label" %>
+
+  <%= f.radio_button :title, "Mme" %>
+  <%= f.label :title, "Mme", class: "form-check-label" %>
+
+  <%= f.radio_button :title, "Mlle" %>
+  <%= f.label :title, "Mlle", class: "form-check-label" %>
+
+  <br><br>
+  <%= f.text_field :firstname, placeholder: 'firstname', class: 'form-control' %>
+  <br>
+  <%= f.text_field :lastname, placeholder: 'lastname', class: 'form-control' %>
+  <br>
+  <%= f.text_field :birthday, placeholder: 'birthday', class: 'form-control' %>
+  <br>
+  <%= f.text_field :city, placeholder: 'city', class: 'form-control' %>
+  <br>
+
+  <%= f.label :monthly_salary_range, "Revenu mensuel", class: "form-check-label" %>
+  <%= f.select :monthly_salary_range, options_for_select(
+    [['0€ à 999€', 0], ['1000€ à 1999€', 1], ['2000€ à 2999€', 2],['plus de 3000€', 3]], 0) %>
+  <br><br>
+  <!-- added -->
+
+
+  <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'email',
+    class: 'form-control' %>
+  <br>
+  <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+  <% end %><br />
+  <%= f.password_field :password, autocomplete: "off", placeholder: 'password', class: 'form-control' %>
+  <br>
+  <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'password confirmation',
+    class: 'form-control' %>
+  <br>
+  <%= f.submit "Sign up", class: 'btn btn-primary' %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
 <% end %>
 
 <%= render "devise/shared/links" %>

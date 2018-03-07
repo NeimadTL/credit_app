@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rubocop', '~> 0.53.0', require: false
 gem 'devise', '>= 3.2.4'
 gem 'bootstrap', '~> 4.0.0'
+gem 'sprockets'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

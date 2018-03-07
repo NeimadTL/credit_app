@@ -23,10 +23,8 @@
   <br>
   <%= f.text_field :city, placeholder: 'city', class: 'form-control' %>
   <br>
-
-  <%= f.label :monthly_salary_range, "Revenu mensuel", class: "form-check-label" %>
-  <%= f.select :monthly_salary_range, options_for_select(
-    [['0€ à 999€', 0], ['1000€ à 1999€', 1], ['2000€ à 2999€', 2],['plus de 3000€', 3]], 0) %>
+  <%= f.label :monthly_salary_range_id, "Revenu mensuel", class: "form-check-label" %>
+  <%= f.collection_select :monthly_salary_range_id, MonthlySalaryRange.all, :id, :range %>
   <br><br>
   <!-- added -->
 

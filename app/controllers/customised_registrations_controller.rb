@@ -9,7 +9,7 @@ class CustomisedRegistrationsController < Devise::RegistrationsController
 
     def sign_up_params
       params.require(resource_name).permit(:title, :firstname, :lastname, :birthday, :city,
-        :monthly_salary_range, :email, :password, :password_confirmation)
+        :monthly_salary_range_id, :email, :password, :password_confirmation)
     end
 
 end

@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+MonthlySalaryRange.create!(range: 'de 0 à 999€')
+MonthlySalaryRange.create!(range: 'de 1000 à 1999€')
+MonthlySalaryRange.create!(range: 'de 2000 à 2999€')
+MonthlySalaryRange.create!(range: 'plus de 3000€')

@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
   validates :lastname, presence: true
   validates :birthday, presence: true
   validates :city, presence: true
-  validates :monthly_salary_range, presence: true
+
+  belongs_to :monthly_salary_range
 
   after_create :setup_country
 

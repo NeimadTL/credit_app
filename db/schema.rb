@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180307165647) do
+ActiveRecord::Schema.define(version: 20180307205303) do
+
+  create_table "bank_accounts", force: :cascade do |t|
+    t.string   "branch_code"
+    t.string   "sort_code"
+    t.string   "account_number"
+    t.string   "rib_key"
+    t.string   "account_state"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "monthly_salary_ranges", force: :cascade do |t|
     t.string   "range"

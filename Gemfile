@@ -24,7 +24,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rubocop', '~> 0.53.0', require: false
 gem 'devise', '>= 3.2.4'
-gem 'rspec-rails'
 gem 'bootstrap', '~> 4.0.0'
 
 # Use ActiveModel has_secure_password
@@ -39,6 +38,8 @@ gem 'bootstrap', '~> 4.0.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 group :development do

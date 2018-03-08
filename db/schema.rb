@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308090758) do
+ActiveRecord::Schema.define(version: 20180308161521) do
 
   create_table "account_states", force: :cascade do |t|
     t.string   "state"
@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(version: 20180308090758) do
     t.string   "rib_key"
     t.integer  "account_state_id"
     t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.decimal  "balance",          default: 0.0
   end
 
   create_table "monthly_salary_ranges", force: :cascade do |t|

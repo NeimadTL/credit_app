@@ -4,5 +4,5 @@
   Numéro de compte : <%= account.account_number %><br/>
   Clé RIB : <%= account.rib_key %><br/>
   Statut : <%= account.account_state.state %><br/>
-  Solde : N/A<br/><br/>
+  Solde : <%= number_to_currency(account.balance, locale: "fr", precision: 2)  %><br/><br/>
 <% end %>

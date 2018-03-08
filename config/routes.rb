@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   namespace :client do
-    resources :bank_accounts, only: [:index, :new, :create]
+    resources :bank_accounts, only: [:index, :new, :create, :show]
   end
 
 

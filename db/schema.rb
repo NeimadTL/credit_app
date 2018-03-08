@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308212515) do
+ActiveRecord::Schema.define(version: 20180308224233) do
 
   create_table "account_states", force: :cascade do |t|
     t.string   "state"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20180308212515) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.string   "type"
+    t.string   "transaction_type"
     t.string   "transaction_state"
     t.integer  "bank_account_id"
     t.datetime "created_at",        null: false

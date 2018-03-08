@@ -1,0 +1,9 @@
+Détails compte
+<br/><br/>
+
+<% @bank_account.transactions.each do |transaction| %>
+  Type : <%= transaction.transaction_type %><br/>
+  Statut : <%= transaction.transaction_state %><br/>
+  Effectué le : <%= DateTime.parse(transaction.created_at.to_s).strftime('%A %B %d %H:%M') %><br/>
+  <br/>
+<% end %>

@@ -2,7 +2,7 @@ class Client::BankAccountsController < ApplicationController
 
 
   before_action :authenticate_user!
-
+  before_action :set_bank_account, only: [:show]
 
   def index
     @bank_accounts = BankAccount.where(user_id: current_user.id)
@@ -26,10 +26,18 @@ class Client::BankAccountsController < ApplicationController
   end
 
 
+  def show
+  end
+
+
   private
 
     def bank_account_params
       params.require(:bank_account).permit(:branch_code, :sort_code, :account_number, :rib_key)
+    end
+
+    def set_bank_account
+      @bank_account = BankAccount.find(params[:id])
     end
 
 

@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates :city, presence: true
 
   belongs_to :monthly_salary_range
+  has_many :bank_accounts
 
   after_create :setup_country
 

@@ -8,4 +8,5 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of :birthday }
   it { should validate_presence_of :city }
   it { is_expected.to belong_to(:monthly_salary_range) }
+  it { is_expected.to have_many(:bank_accounts) }
 end

@@ -39,6 +39,7 @@ RSpec.describe BankAccount, type: :model do
   it { should allow_value("12").for(:rib_key) }
 
 
-  it { should validate_presence_of :account_state }
+  it { is_expected.to belong_to(:account_state) }
+  it { is_expected.to belong_to(:user) }
 
 end

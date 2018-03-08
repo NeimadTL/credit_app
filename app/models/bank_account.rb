@@ -9,5 +9,16 @@ class BankAccount < ActiveRecord::Base
   belongs_to :account_state
   belongs_to :user
 
+  after_create :setup_default_account_state
+
+  PENDING_ACTIVATION = 'en attente d\'activation'
+
+  private
+
+    def setup_default_account_state
+      account_state = AccountState.where(state: PENDING_ACTIVATION).first
+      self.update_attributes(account_state_id: account_state.id)
+    end
+
 
 end

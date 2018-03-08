@@ -1,0 +1,8 @@
+<% @bank_accounts.each do |account| %>
+  Code banque : <%= account.branch_code %><br/>
+  Code Guichet : <%= account.sort_code %><br/>
+  Numéro de compte : <%= account.account_number %><br/>
+  Clé RIB : <%= account.rib_key %><br/>
+  Statut : <%= account.account_state.state %><br/>
+  Solde : N/A<br/><br/>
+<% end %>

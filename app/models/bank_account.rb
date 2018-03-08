@@ -8,6 +8,7 @@ class BankAccount < ActiveRecord::Base
 
   belongs_to :account_state
   belongs_to :user
+  has_many :transactions, :dependent => :destroy
 
   after_create :setup_default_account_state
 

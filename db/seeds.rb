@@ -8,6 +8,7 @@
 
 MonthlySalaryRange.delete_all
 AccountState.delete_all
+TransactionState.delete_all
 
 MonthlySalaryRange.create!(range: 'de 0 à 999€')
 MonthlySalaryRange.create!(range: 'de 1000 à 1999€')
@@ -17,3 +18,7 @@ MonthlySalaryRange.create!(range: 'plus de 3000€')
 AccountState.create!(state: 'en attente d\'activation')
 AccountState.create!(state: 'actif')
 AccountState.create!(state: 'fermé')
+
+TransactionState.create!(state_tid:1, state: "en attente")
+TransactionState.create!(state_tid:2, state: "refusée")
+TransactionState.create!(state_tid:3, state: "validée")

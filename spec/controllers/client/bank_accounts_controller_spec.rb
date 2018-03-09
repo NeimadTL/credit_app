@@ -8,7 +8,12 @@ RSpec.describe Client::BankAccountsController, type: :controller do
     User.create!(title: "Mr", firstname: "John", lastname: "Doe",
       city: "San Francisco", birthday: "22/12/1992", monthly_salary_range_id: range.id,
       email: "something@gmail.com", password: "12345678", password_confirmation: "12345678")
-    }
+  }
+
+  let(:bank_account) {
+    BankAccount.create!(branch_code: "92833", sort_code: "02939", account_number: "9384927463Y",
+      rib_key: "26", user_id: user.id);
+  }
 
   describe "when GET #index" do
 
@@ -113,6 +118,37 @@ RSpec.describe Client::BankAccountsController, type: :controller do
       end
     end
 
+  end
+
+
+  describe "when GET #show" do
+
+    before do
+      sign_in(user, nil)
+    end
+
+    it "with logged in user, returns http success" do
+      get :show, id: bank_account.id
+      expect(response).to have_http_status(:success)
+    end
+
+    it "with nonexistent resource, renders 404.html file" do
+      get :show, id: Random.new.rand(2000..3000)
+      expect(response).to render_template(:file => "#{Rails.root}/public/404.html")
+    end
+
+    describe "with no user logged in," do
+
+      before do
+        sign_out(user)
+      end
+
+      it "returns http success" do
+        get :show, id: bank_account.id
+        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
   end
 
 

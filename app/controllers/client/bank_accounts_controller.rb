@@ -3,6 +3,7 @@ class Client::BankAccountsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_bank_account, only: [:show]
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
   def index
     @bank_accounts = BankAccount.where(user_id: current_user.id)
@@ -38,6 +39,12 @@ class Client::BankAccountsController < ApplicationController
 
     def set_bank_account
       @bank_account = BankAccount.find(params[:id])
+    end
+
+    def not_found(e)
+      # render :json => { :message => e.message }, :status => :not_found
+      # raise ActionController::RoutingError.new('Not Found')
+      render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
     end
 
 

@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :city, presence: true
 
   belongs_to :monthly_salary_range, foreign_key: "monthly_salary_range_id"
-  has_many :bank_accounts
+  has_many :bank_accounts, :dependent => :destroy
 
   after_create :setup_country
 

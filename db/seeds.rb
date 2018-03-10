@@ -10,15 +10,23 @@ MonthlySalaryRange.delete_all
 AccountState.delete_all
 TransactionState.delete_all
 
-MonthlySalaryRange.create!(range_tid:1, range: 'de 0 à 999€')
-MonthlySalaryRange.create!(range_tid:2, range: 'de 1000 à 1999€')
-MonthlySalaryRange.create!(range_tid:3, range: 'de 2000 à 2999€')
-MonthlySalaryRange.create!(range_tid:4, range: 'plus de 3000€')
+MonthlySalaryRange.create!(
+  range_tid: MonthlySalaryRange::BETWEEN_0_AND_999_RANGE_TID,
+  range: 'de 0 à 999€')
+MonthlySalaryRange.create!(
+  range_tid: MonthlySalaryRange::BETWEEN_1000_AND_1999_RANGE_TID,
+  range: 'de 1000 à 1999€')
+MonthlySalaryRange.create!(
+  range_tid: MonthlySalaryRange::BETWEEN_2000_AND_2999_RANGE_TID,
+  range: 'de 2000 à 2999€')
+MonthlySalaryRange.create!(
+  range_tid: MonthlySalaryRange::GREATER_THAN_3000_RANGE_TID,
+  range: 'plus de 3000€')
 
-AccountState.create!(state: 'en attente d\'activation')
-AccountState.create!(state: 'actif')
-AccountState.create!(state: 'fermé')
+AccountState.create!(state_tid: AccountState::PENDING_ACTIVATION_STATE_TID, state: 'en attente d\'activation')
+AccountState.create!(state_tid: AccountState::ACTIVE_STATE_TID, state: 'actif')
+AccountState.create!(state_tid: AccountState::CLOSED_STATE_TID, state: 'fermé')
 
-TransactionState.create!(state_tid:1, state: "en attente")
-TransactionState.create!(state_tid:2, state: "refusée")
-TransactionState.create!(state_tid:3, state: "validée")
+TransactionState.create!(state_tid: TransactionState::PENDING_STATE_TID, state: "en attente")
+TransactionState.create!(state_tid: TransactionState::CANCELLED_STATE_TID, state: "refusée")
+TransactionState.create!(state_tid: TransactionState::VALIDATED_STATE_TID, state: "validée")

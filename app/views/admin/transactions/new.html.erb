@@ -1,0 +1,25 @@
+<br/>
+<p>Saisissez les inforamtions de la transaction</p>
+<%= simple_form_for @transaction, url: admin_transactions_path do |f| %>
+
+  <%= f.radio_button :transaction_type, "Crédit" %>
+  <%= f.label :transaction_type, "Crédit", class: "form-check-label" %>
+
+  <%= f.radio_button :transaction_type, "Débit" %>
+  <%= f.label :transaction_type, "Débit", class: "form-check-label" %>
+  <br/><br/>
+
+  <%= f.label :monthly_salary_range_id, "Statut", class: "form-check-label" %>
+  <%= f.collection_select :state_tid, TransactionState.all, :id, :state %>
+  <br/><br/>
+
+  <%= f.label :value, "Montant", class: "form-check-label" %>
+  <%= f.number_field :value, class: 'form-control' %>
+  <br/>
+
+  <%= f.label :bank_account_id, "Numéro de compte", class: "form-check-label" %>
+  <%= f.collection_select :bank_account_id, BankAccount.all, :id, :account_number %>
+
+  <br/><br/>
+  <%= f.submit 'Créer', class: 'btn btn-primary' %>
+<% end %>

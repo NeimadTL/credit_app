@@ -1,0 +1,11 @@
+<h1>All transactions</h1>
+
+<br/><br/>
+
+<% @transactions.each do |transaction| %>
+  Type : <%= transaction.transaction_type %><br/>
+  Statut : <%= transaction.transaction_state.state %><br/>
+  Effectué le : <%= DateTime.parse(transaction.created_at.to_s).strftime('%A %B %d %H:%M') %><br/>
+  Montant : <%= number_to_currency(transaction.value, locale: "fr", precision: 2) %><br/>
+  <br/>
+<% end %>

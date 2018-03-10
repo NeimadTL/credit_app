@@ -8,5 +8,8 @@ Rails.application.routes.draw do
     resources :bank_accounts, only: [:index, :new, :create, :show]
   end
 
+  namespace :admin do
+    resources :transactions, only: [:index, :new, :create]
+  end
 
 end

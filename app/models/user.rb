@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates :birthday, presence: true
   validates :city, presence: true
 
-  belongs_to :monthly_salary_range
+  belongs_to :monthly_salary_range, foreign_key: "monthly_salary_range_id"
   has_many :bank_accounts
 
   after_create :setup_country

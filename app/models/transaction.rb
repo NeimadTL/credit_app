@@ -1,6 +1,9 @@
 class Transaction < ActiveRecord::Base
 
 
+  CREDIT_TRANSACTION_TYPE = "Crédit"
+  DEBIT_TRANSACTION_TYPE = "Débit"
+
   validates :transaction_type, presence: true, inclusion: { in: %w(Crédit Débit) }
   validates :state_tid, presence: true
   validates :value, presence: true, numericality: true

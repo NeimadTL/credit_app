@@ -27,6 +27,7 @@ gem 'devise', '>= 3.2.4'
 gem 'bootstrap', '~> 4.0.0'
 gem 'sprockets'
 gem 'simple_form'
+gem 'bootstrap-will_paginate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

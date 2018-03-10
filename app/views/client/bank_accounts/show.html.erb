@@ -1,10 +1,12 @@
 Détails compte
 <br/><br/>
 
-<% @bank_account.transactions.each do |transaction| %>
+<% @transactions.each do |transaction| %>
   Type : <%= transaction.transaction_type %><br/>
   Statut : <%= transaction.transaction_state.state %><br/>
   Effectué le : <%= DateTime.parse(transaction.created_at.to_s).strftime('%A %B %d %H:%M') %><br/>
   Montant : <%= number_to_currency(transaction.value, locale: "fr", precision: 2) %><br/>
   <br/>
 <% end %>
+
+<%= will_paginate(@transactions, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>

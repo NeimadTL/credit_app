@@ -28,6 +28,7 @@ class Client::BankAccountsController < ApplicationController
 
 
   def show
+    @transactions = @bank_account.transactions.paginate(:page => params[:page], :per_page => 10)
   end
 
 
@@ -42,8 +43,6 @@ class Client::BankAccountsController < ApplicationController
     end
 
     def not_found(e)
-      # render :json => { :message => e.message }, :status => :not_found
-      # raise ActionController::RoutingError.new('Not Found')
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
     end
 

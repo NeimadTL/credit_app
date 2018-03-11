@@ -32,7 +32,8 @@ class Admin::UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:title, :firstname, :birthday, :email, :city, :monthly_salary_range_id)
+      params.require(:user).permit(:title, :firstname, :lastname, :birthday,
+        :email, :city, :monthly_salary_range_id)
     end
 
     def set_user

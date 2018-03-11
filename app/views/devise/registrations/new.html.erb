@@ -3,31 +3,7 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <!-- added -->
-
-  <%= f.radio_button :title, "Mr" %>
-  <%= f.label :title, "Mr", class: "form-check-label" %>
-
-  <%= f.radio_button :title, "Mme" %>
-  <%= f.label :title, "Mme", class: "form-check-label" %>
-
-  <%= f.radio_button :title, "Mlle" %>
-  <%= f.label :title, "Mlle", class: "form-check-label" %>
-
-  <br><br>
-  <%= f.text_field :firstname, placeholder: 'firstname', class: 'form-control' %>
-  <br>
-  <%= f.text_field :lastname, placeholder: 'lastname', class: 'form-control' %>
-  <br>
-  <%= f.text_field :birthday, placeholder: 'birthday', class: 'form-control' %>
-  <br>
-  <%= f.text_field :city, placeholder: 'city', class: 'form-control' %>
-  <br>
-  <%= f.label :monthly_salary_range_id, "Revenu mensuel", class: "form-check-label" %>
-  <%= f.collection_select :monthly_salary_range_id, MonthlySalaryRange.all, :id, :range %>
-  <br><br>
-  <!-- added -->
-
+  <%= render partial: '/shared/users/form', locals: { f: f } %>
 
   <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'email',
     class: 'form-control' %>

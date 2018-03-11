@@ -2,6 +2,7 @@ class Admin::TransactionsController < ApplicationController
 
 
   before_action :authenticate_user!
+  before_action :require_to_be_admin
 
 
   def index
@@ -35,5 +36,10 @@ class Admin::TransactionsController < ApplicationController
       params.require(:transaction).permit(:transaction_type, :state_tid, :bank_account_id, :value)
     end
 
-
+    def require_to_be_admin
+      unless current_user.role.role_tid == Role::ADMIN_ROLE_TID
+        # render text: "Unauthorized", status: :unauthorized
+        render :file => "#{Rails.root}/public/401", :layout => false, :status => :unauthorized
+      end
+    end
 end

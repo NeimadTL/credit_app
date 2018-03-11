@@ -30,3 +30,6 @@ AccountState.create!(state_tid: AccountState::CLOSED_STATE_TID, state: 'fermé')
 TransactionState.create!(state_tid: TransactionState::PENDING_STATE_TID, state: "en attente")
 TransactionState.create!(state_tid: TransactionState::CANCELLED_STATE_TID, state: "refusée")
 TransactionState.create!(state_tid: TransactionState::VALIDATED_STATE_TID, state: "validée")
+
+Role.create!(role_tid: Role::ADMIN_ROLE_TID, role_label: "admin")
+Role.create!(role_tid: Role::CLIENT_ROLE_TID, role_label: "client")

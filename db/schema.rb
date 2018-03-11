@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310133455) do
+ActiveRecord::Schema.define(version: 20180310233534) do
 
   create_table "account_states", force: :cascade do |t|
     t.string   "state"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 20180310133455) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "range_tid"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.integer  "role_tid"
+    t.string   "role_label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "transaction_states", force: :cascade do |t|
@@ -75,6 +82,7 @@ ActiveRecord::Schema.define(version: 20180310133455) do
     t.string   "city"
     t.integer  "monthly_salary_range_id"
     t.string   "country"
+    t.integer  "role_tid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

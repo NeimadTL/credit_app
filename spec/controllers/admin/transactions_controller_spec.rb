@@ -12,7 +12,7 @@ RSpec.describe Admin::TransactionsController, type: :controller do
 
   let(:bank_account) {
     BankAccount.create!(branch_code: "92833", sort_code: "02939", account_number: "9384927463Y",
-      rib_key: "26", user_id: user.id);
+      rib_key: "26", user_id: user.id, balance: 0.0);
   }
 
 
@@ -102,6 +102,8 @@ RSpec.describe Admin::TransactionsController, type: :controller do
       expect(created_transaction.state_tid).to be == TransactionState::VALIDATED_STATE_TID
       expect(created_transaction.bank_account_id).to be == bank_account.id
       expect(created_transaction.value).to be == 1000
+      new_balance = BankAccount.find(created_transaction.bank_account_id).balance
+      expect(new_balance).to be == 1000
       expect(flash[:notice]).to match('Transaction crée avec succès')
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(admin_transactions_path)

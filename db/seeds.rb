@@ -9,6 +9,7 @@
 MonthlySalaryRange.delete_all
 AccountState.delete_all
 TransactionState.delete_all
+Role.delete_all
 
 MonthlySalaryRange.create!(
   range_tid: MonthlySalaryRange::BETWEEN_0_AND_999_RANGE_TID,

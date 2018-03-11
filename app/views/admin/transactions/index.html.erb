@@ -1,5 +1,5 @@
-<h1>All transactions</h1>
-
+Nombre de transactions en attente :
+<%= @transactions.where(transaction_state: TransactionState::PENDING_STATE_TID).count %>
 <br/><br/>
 
 <% @transactions.each do |transaction| %>
@@ -7,5 +7,7 @@
   Statut : <%= transaction.transaction_state.state %><br/>
   Effectué le : <%= DateTime.parse(transaction.created_at.to_s).strftime('%A %B %d %H:%M') %><br/>
   Montant : <%= number_to_currency(transaction.value, locale: "fr", precision: 2) %><br/>
+  Client : <%= transaction.bank_account.user.firstname %> <%= transaction.bank_account.user.lastname %><br/>
+  Numéro de compte : <%= transaction.bank_account.account_number %> <br/>
   <br/>
 <% end %>

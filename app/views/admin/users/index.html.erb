@@ -1,3 +1,5 @@
+Nombre de clients : <%= @users.count %>
+<br/><br/>
 <% @users.each do |user| %>
   Civilité : <%= user.title %><br/>
   Prénom : <%= user.firstname %><br/>

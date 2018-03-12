@@ -50,10 +50,10 @@
             <%= link_to 'Nouvelle transaction', new_admin_transaction_path, class: 'nav-link' %>
             <%= link_to 'Gérer les clients', admin_users_path, class: 'nav-link' %>
           <% end %>
-          <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          <%= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, class: 'nav-link' %>
         <% else %>
-          <%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %>
-          <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+          <%= link_to 'Se connecter', new_user_session_path, class: 'nav-link' %>
+          <%= link_to 'S\'inscrire', new_user_registration_path, class: 'nav-link' %>
         <% end %>
         <!-- <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

@@ -1,12 +1,29 @@
-Détails compte
-<br/><br/>
+<br/>
+<h3 class="text-center">Transactions sur le compte N° <%= @bank_account.account_number %></h3>
+<br/>
+<div class="table-responsive-sm">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Effectué le</th>
+        <th scope="col">Montant</th>
+      </tr>
+    </thead>
 
-<% @transactions.each do |transaction| %>
-  Type : <%= transaction.transaction_type %><br/>
-  Statut : <%= transaction.transaction_state.state %><br/>
-  Effectué le : <%= DateTime.parse(transaction.created_at.to_s).strftime('%A %B %d %H:%M') %><br/>
-  Montant : <%= number_to_currency(transaction.value, locale: "fr", precision: 2) %><br/>
-  <br/>
-<% end %>
+    <% @transactions.each do |transaction| %>
+      <tbody>
+        <tr>
+          <td><%= transaction.transaction_type %></td>
+          <td><%= transaction.transaction_state.state %></td>
+          <td><%= DateTime.parse(transaction.created_at.to_s).strftime('%A %B %d %H:%M') %></td>
+          <td><%= number_to_currency(transaction.value, locale: "fr", precision: 2) %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+</div>
+
 
 <%= will_paginate(@transactions, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>

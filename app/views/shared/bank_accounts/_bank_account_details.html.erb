@@ -1,6 +1,13 @@
-Code banque : <%= account.branch_code %><br/>
-Code Guichet : <%= account.sort_code %><br/>
-Numéro de compte : <%= account.account_number %><br/>
-Clé RIB : <%= account.rib_key %><br/>
-Statut : <%= account.account_state.state %><br/>
-Solde : <%= number_to_currency(account.balance, locale: "fr", precision: 2)  %><br/>
+<tbody>
+  <tr>
+    <td><%= account.branch_code %></td>
+    <td><%= account.sort_code %></td>
+    <td>
+      <%= link_to "#{account.account_number}", client_bank_account_path(account),
+        class: 'btn btn-primary btn-sm' %>
+    </td>
+    <td><%= account.rib_key %></td>
+    <td><%= account.account_state.state %></td>
+    <td><%= number_to_currency(account.balance, locale: "fr", precision: 2)  %></td>
+  </tr>
+</tbody>

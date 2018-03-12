@@ -1,6 +1,21 @@
-<% @bank_accounts.each do |account| %>
-  <%= render partial: '/shared/bank_accounts/bank_account_details', locals: { account: account} %>
+<br>
+<h3 class="text-center"> Mes comptes</h3>
+<div class="table-responsive-sm">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Code banque</th>
+        <th scope="col">Code guichet</th>
+        <th scope="col">Numéro de compte</th>
+        <th scope="col">Clé RIB</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Solde</th>
+      </tr>
+    </thead>
+    <% @bank_accounts.each do |account| %>
+      <%= render partial: '/shared/bank_accounts/bank_account_details', locals: { account: account} %>
+      <br/><br/>
+    <% end %>
 
-  <%= link_to "Details compte", client_bank_account_path(account), class: 'btn btn-primary btn-sm' %>
-  <br/><br/>
-<% end %>
+  </table>
+</div>

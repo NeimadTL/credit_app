@@ -6,8 +6,7 @@
 
   <%= render partial: '/shared/users/form', locals: { f: f } %>
 
-  <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'email',
-    class: 'form-control' %>
+  <%= f.email_field :email, autocomplete: "email", placeholder: 'email', class: 'form-control' %>
   <br>
   <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>

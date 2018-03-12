@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :transactions, only: [:index, :new, :create]
+    resources :transactions, only: [:index, :new, :create, :update]
     resources :users, only: [:index, :show, :edit, :update, :destroy]
     resources :bank_accounts, only: [:update]
   end

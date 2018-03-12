@@ -7,7 +7,7 @@
       <%= hidden_field_tag "bank_account[account_state_id]", AccountState::ACTIVE_STATE_TID %>
     <% end %>
   <% elsif account.account_state.state_tid == AccountState::ACTIVE_STATE_TID %>
-    <%= button_to admin_bank_account_path(account), method: :put, class: 'btn btn-primary btn-sm' do %>
+    <%= button_to admin_bank_account_path(account), method: :put, class: 'btn btn-danger btn-sm' do %>
       <span>Fermer ce compte</span>
       <%= hidden_field_tag "bank_account[account_state_id]", AccountState::CLOSED_STATE_TID %>
     <% end %>

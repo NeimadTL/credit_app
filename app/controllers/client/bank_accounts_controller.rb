@@ -29,7 +29,7 @@ class Client::BankAccountsController < ApplicationController
 
   def show
     @transactions = @bank_account.transactions.order(created_at: :desc)
-      .paginate(:page => params[:page], :per_page => 10)
+      .paginate(:page => params[:page], :per_page => 5)
   end
 
 

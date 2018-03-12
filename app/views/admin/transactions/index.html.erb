@@ -2,25 +2,48 @@ Nombre de transactions en attente :
 <%= @transactions.where(transaction_state: TransactionState::PENDING_STATE_TID).count %>
 <br/><br/>
 
-<% @transactions.each do |transaction| %>
-  Type : <%= transaction.transaction_type %><br/>
-  Statut : <%= transaction.transaction_state.state %><br/>
-  Effectué le : <%= DateTime.parse(transaction.created_at.to_s).strftime('%A %B %d %H:%M') %><br/>
-  Montant : <%= number_to_currency(transaction.value, locale: "fr", precision: 2) %><br/>
-  Client : <%= transaction.bank_account.user.firstname %> <%= transaction.bank_account.user.lastname %><br/>
-  Numéro de compte : <%= transaction.bank_account.account_number %> <br/>
-  <br/>
-  <% if transaction.transaction_state.state_tid == TransactionState::PENDING_STATE_TID %>
-    <div class="btn-group btn-group-sm" role="group">
-      <%= button_to admin_transaction_path(transaction), method: :put, class: 'btn btn-primary btn-sm' do %>
-        <span>Valider la transaction</span>
-        <%= hidden_field_tag "transaction[state_tid]", TransactionState::VALIDATED_STATE_TID %>
-      <% end %>
-      <%= button_to admin_transaction_path(transaction), method: :put, class: 'btn btn-danger btn-sm' do %>
-        <span>Annuler la transaction</span>
-        <%= hidden_field_tag "transaction[state_tid]", TransactionState::CANCELLED_STATE_TID %>
-      <% end %>
-    </div>
-  <% end %>
+<br/>
+<h3 class="text-center">Transactions effectuées</h3>
+<br/>
+<div class="table-responsive-sm">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Effectué le</th>
+        <th scope="col">Montant</th>
+        <th scope="col">Client</th>
+        <th scope="col">Numéro de compte</th>
+      </tr>
+    </thead>
+    <% @transactions.each do |transaction| %>
+      <tbody>
+        <tr>
+          <td><%= transaction.transaction_type %></td>
+          <td><%= transaction.transaction_state.state %></td>
+          <td><%= DateTime.parse(transaction.created_at.to_s).strftime('%A %B %d %H:%M') %></td>
+          <td><%= number_to_currency(transaction.value, locale: "fr", precision: 2) %></td>
+          <td><%= transaction.bank_account.user.firstname %> <%= transaction.bank_account.user.lastname %></td>
+          <td><%= transaction.bank_account.account_number %></td>
+          <td>
+            <% if transaction.transaction_state.state_tid == TransactionState::PENDING_STATE_TID %>
+              <div class="btn-group btn-group-sm" role="group">
+                <%= button_to admin_transaction_path(transaction), method: :put, class: 'btn btn-primary btn-sm' do %>
+                  <span>Valider la transaction</span>
+                  <%= hidden_field_tag "transaction[state_tid]", TransactionState::VALIDATED_STATE_TID %>
+                <% end %>
+                <%= button_to admin_transaction_path(transaction), method: :put, class: 'btn btn-danger btn-sm' do %>
+                  <span>Annuler la transaction</span>
+                  <%= hidden_field_tag "transaction[state_tid]", TransactionState::CANCELLED_STATE_TID %>
+                <% end %>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+</div>
 
-<% end %>
+<%= will_paginate(@transactions, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>

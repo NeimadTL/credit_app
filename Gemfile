@@ -28,6 +28,7 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'sprockets'
 gem 'simple_form'
 gem 'bootstrap-will_paginate'
+gem 'pg', '~> 0.20.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -36,10 +36,11 @@ class Admin::TransactionsController < ApplicationController
     if @transaction.valid?
       TransactionManager.new(@transaction).execute_transaction
       flash[:notice] = 'Transaction mise à jour avec succès'
-      redirect_to admin_transactions_path
+      # redirect_to admin_transactions_path
     else
-      flash[:notice] = 'Une erreur est survenue'
+      flash[:alert] = 'Une erreur est survenue'
     end
+    redirect_to admin_transactions_path
   end
 
 

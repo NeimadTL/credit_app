@@ -15,6 +15,12 @@ RSpec.describe Admin::TransactionsController, type: :controller do
       rib_key: "26", user_id: user.id, balance: 0.0);
   }
 
+  let(:transaction) {
+    Transaction.create!(transaction_type: Transaction::CREDIT_TRANSACTION_TYPE,
+      state_tid: TransactionState::PENDING_STATE_TID, bank_account_id: bank_account.id,
+      value: 1000)
+  }
+
 
   describe "when GET #index" do
 
@@ -147,4 +153,53 @@ RSpec.describe Admin::TransactionsController, type: :controller do
       end
     end
   end
+
+
+  describe "when PUT/PATCH #update" do
+
+    before do
+      sign_in(user, nil)
+    end
+
+    it "with authorized logged in user and good params, returns http redirect and flashes succes" do
+      user.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
+      put :update, id: transaction.id, transaction: { state_tid: TransactionState::VALIDATED_STATE_TID }
+      updated_transaction = Transaction.find(transaction.id)
+      expect(updated_transaction.state_tid).to be == TransactionState::VALIDATED_STATE_TID
+      expect(flash[:notice]).to match('Transaction mise à jour avec succès')
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(admin_transactions_path)
+    end
+
+
+    skip "with authorized logged in user and bad params, returns http redirect and flashes error" do
+      user.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
+      put :update, id: transaction.id, transaction: { state_tid: 'bad param' }
+      expect(flash[:alert]).to match('Une erreur est survenue')
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(admin_transactions_path)
+    end
+
+    it "with unauthorized logged in user, render 401 file" do
+      user.update_attributes(role_tid: Role::CLIENT_ROLE_TID)
+      put :update, id: transaction.id, transaction: { state_tid: TransactionState::VALIDATED_STATE_TID }
+      expect(response).to render_template(:file => "#{Rails.root}/public/401.html")
+    end
+
+    describe "with no user logged in," do
+
+      before do
+        sign_out(user)
+      end
+
+      it "returns http redirect" do
+        put :update, id: transaction.id, transaction: { state_tid: TransactionState::VALIDATED_STATE_TID }
+        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
+
+
 end

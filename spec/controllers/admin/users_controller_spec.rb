@@ -85,7 +85,7 @@ RSpec.describe Admin::UsersController, type: :controller do
   end
 
 
-  describe "when POST #update" do
+  describe "when PUT/PATCH #update" do
 
     before do
       sign_in(admin, nil)
@@ -155,6 +155,88 @@ RSpec.describe Admin::UsersController, type: :controller do
                 city: 'Boston',
                 monthly_salary_range_id: MonthlySalaryRange::BETWEEN_2000_AND_2999_RANGE_TID
               }
+        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
+
+
+  describe "when GET #show" do
+
+    before do
+      sign_in(admin, nil)
+    end
+
+    it "with authorized logged in user, returns http success" do
+      admin.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
+      get :show, id: client.id
+      expect(response).to have_http_status(:success)
+    end
+
+    it "with authorized logged in user and nonexistent resource, renders 404.html file" do
+      admin.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
+      get :show, id: Random.new.rand(2000..3000)
+      expect(response).to render_template(:file => "#{Rails.root}/public/404.html")
+    end
+
+    it "with unauthorized logged in user, renders 401.html file" do
+      admin.update_attributes(role_tid: Role::CLIENT_ROLE_TID)
+      get :show, id: client.id
+      expect(response).to render_template(:file => "#{Rails.root}/public/401.html")
+    end
+
+
+    describe "with no user logged in," do
+
+      before do
+        sign_out(admin)
+      end
+
+      it "returns http redirect" do
+        get :show, id: client.id
+        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
+
+  describe "when DELETE #destroy" do
+
+    before do
+      sign_in(admin, nil)
+    end
+
+    it "with authorized logged in user, returns http redirect" do
+      admin.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
+      get :destroy, id: client.id
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(admin_users_path)
+    end
+
+    it "with authorized logged in user and nonexistent resource, renders 404.html file" do
+      admin.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
+      get :destroy, id: Random.new.rand(2000..3000)
+      expect(response).to render_template(:file => "#{Rails.root}/public/404.html")
+    end
+
+    it "with unauthorized logged in user, renders 401.html file" do
+      admin.update_attributes(role_tid: Role::CLIENT_ROLE_TID)
+      get :destroy, id: client.id
+      expect(response).to render_template(:file => "#{Rails.root}/public/401.html")
+    end
+
+
+    describe "with no user logged in," do
+
+      before do
+        sign_out(admin)
+      end
+
+      it "returns http redirect" do
+        get :destroy, id: client.id
         expect(response).to have_http_status(:redirect)
         expect(response).to redirect_to(new_user_session_path)
       end

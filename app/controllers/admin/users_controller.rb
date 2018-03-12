@@ -2,11 +2,15 @@ class Admin::UsersController < ApplicationController
 
 
   before_action :authenticate_user!
-  before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_to_be_admin
 
   def index
     @users = User.where(role_tid: Role::CLIENT_ROLE_TID)
+  end
+
+  def show
+    @bank_accounts = @user.bank_accounts
   end
 
   def edit

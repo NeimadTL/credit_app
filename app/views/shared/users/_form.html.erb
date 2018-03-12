@@ -8,13 +8,13 @@
 <%= f.label :title, "Mlle", class: "form-check-label" %>
 
 <br><br>
-<%= f.text_field :firstname, placeholder: 'firstname', class: 'form-control' %>
+<%= f.text_field :firstname, placeholder: 'Nom', class: 'form-control' %>
 <br>
-<%= f.text_field :lastname, placeholder: 'lastname', class: 'form-control' %>
+<%= f.text_field :lastname, placeholder: 'Prénom', class: 'form-control' %>
 <br>
-<%= f.text_field :birthday, placeholder: 'birthday', class: 'form-control' %>
+<%= f.text_field :birthday, placeholder: 'Date de naissance (ex. 31/12/2017)', class: 'form-control' %>
 <br>
-<%= f.text_field :city, placeholder: 'city', class: 'form-control' %>
+<%= f.text_field :city, placeholder: 'Ville', class: 'form-control' %>
 <br>
 <%= f.label :monthly_salary_range_id, "Revenu mensuel", class: "form-check-label" %>
 <%= f.collection_select :monthly_salary_range_id, MonthlySalaryRange.all, :id, :range %>

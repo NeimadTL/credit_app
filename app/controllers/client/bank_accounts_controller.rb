@@ -4,6 +4,7 @@ class Client::BankAccountsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_bank_account, only: [:show]
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+  before_action :require_to_be_client
 
   def index
     @bank_accounts = BankAccount.where(user_id: current_user.id)
@@ -45,6 +46,12 @@ class Client::BankAccountsController < ApplicationController
 
     def not_found(e)
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
+    end
+
+    def require_to_be_client
+      unless current_user.role.role_tid == Role::CLIENT_ROLE_TID
+        render :file => "#{Rails.root}/public/401", :layout => false, :status => :unauthorized
+      end
     end
 
 

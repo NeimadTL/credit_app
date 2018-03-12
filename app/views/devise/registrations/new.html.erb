@@ -6,15 +6,15 @@
 
   <%= render partial: '/shared/users/form', locals: { f: f } %>
 
-  <%= f.email_field :email, autocomplete: "email", placeholder: 'email', class: 'form-control' %>
+  <%= f.email_field :email, autocomplete: "email", placeholder: 'Email', class: 'form-control' %>
   <br>
   <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
   <% end %><br />
-  <%= f.password_field :password, autocomplete: "off", placeholder: 'password', class: 'form-control' %>
+  <%= f.password_field :password, autocomplete: "off", placeholder: 'Mot de passe', class: 'form-control' %>
   <br>
-  <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'password confirmation',
-    class: 'form-control' %>
+  <%= f.password_field :password_confirmation, autocomplete: "off",
+    placeholder: 'Confirmation de mot de passe', class: 'form-control' %>
   <br>
 
   <%= f.submit "S'inscrire", class: 'btn btn-primary' %>

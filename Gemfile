@@ -29,6 +29,7 @@ gem 'sprockets'
 gem 'simple_form'
 gem 'bootstrap-will_paginate'
 gem 'pg', '~> 0.20.0'
+gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

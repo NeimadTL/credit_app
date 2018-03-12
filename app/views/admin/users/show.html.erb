@@ -1,17 +1,30 @@
-<% @bank_accounts.each do |account| %>
-  <%= render partial: '/shared/bank_accounts/bank_account_details', locals: { account: account} %>
+<br/>
+<button type="button" class="btn btn-primary btn-sm">
+  Nombre de comptes
+  <span class="badge badge-light">
+    <%= @user.bank_accounts.count %>
+  </span>
+</button>
+<br/><br/><br/>
 
-  <% if account.account_state.state_tid == AccountState::PENDING_ACTIVATION_STATE_TID %>
-    <%= button_to admin_bank_account_path(account), method: :put, class: 'btn btn-primary btn-sm' do %>
-      <span>Activer ce compter</span>
-      <%= hidden_field_tag "bank_account[account_state_id]", AccountState::ACTIVE_STATE_TID %>
-    <% end %>
-  <% elsif account.account_state.state_tid == AccountState::ACTIVE_STATE_TID %>
-    <%= button_to admin_bank_account_path(account), method: :put, class: 'btn btn-danger btn-sm' do %>
-      <span>Fermer ce compte</span>
-      <%= hidden_field_tag "bank_account[account_state_id]", AccountState::CLOSED_STATE_TID %>
-    <% end %>
-  <% end %>
+<h3 class="text-center">Liste des comptes de <%= @user.firstname %> <%= @user.lastname %></h3>
+<br/>
 
-  <br/><br/>
-<% end %>
+<div class="table-responsive-sm">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Code banque</th>
+        <th scope="col">Code guichet</th>
+        <th scope="col">Numéro de compte</th>
+        <th scope="col">Clé RIB</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Solde</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <% @bank_accounts.each do |account| %>
+      <%= render partial: '/shared/bank_accounts/bank_account_details', locals: { account: account} %>
+    <% end %>
+  </table>
+</div>

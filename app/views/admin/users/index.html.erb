@@ -1,16 +1,48 @@
-Nombre de clients : <%= @users.count %>
-<br/><br/>
-<% @users.each do |user| %>
-  Civilité : <%= user.title %><br/>
-  Prénom : <%= user.firstname %><br/>
-  Nom : <%= user.lastname %><br/>
-  Date de naissance : <%= user.birthday %><br/>
-  Email : <%= user.email %><br/>
-  Ville : <%= user.city %><br/>
-  Revenu mensuel : <%= user.monthly_salary_range.range %><br/>
-  <%= link_to "Voir les comptes", admin_user_path(user), class: 'btn btn-primary btn-sm' %>
-  <%= link_to "Editer", edit_admin_user_path(user), class: 'btn btn-primary btn-sm' %>
-  <%= link_to "Supprimer", admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' },
-    class: 'btn btn-danger btn-sm' %>
-  <br/><br/>
-<% end %>
+<br/>
+<button type="button" class="btn btn-primary btn-sm">
+  Nombre de clients <span class="badge badge-light"><%= @users.count %></span>
+</button>
+
+<br/><br/><br/>
+<h3 class="text-center">Liste de clients</h3>
+<br/>
+<div class="table-responsive-sm">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Civilité</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Date naissance</th>
+        <th scope="col">Email</th>
+        <th scope="col">Ville</th>
+        <th scope="col">Revenu mensuel</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <% @users.each do |user| %>
+    <tbody>
+      <tr>
+        <td><%= user.title %></td>
+        <td><%= user.firstname %></td>
+        <td><%= user.lastname %></td>
+        <td><%= user.birthday %></td>
+        <td><%= user.email %></td>
+        <td><%= user.city %></td>
+        <td><%= user.monthly_salary_range.range %></td>
+        <td>
+          <div class="btn-group btn-group-sm" role="group" aria-label="...">
+            <%= link_to admin_user_path(user), class: 'img-responsive' do %>
+              <%= image_tag 'glyphicons-52-eye-open', class: 'img-responsive' %>
+            <% end %>
+            <%= link_to edit_admin_user_path(user), class: 'img-responsive' do %>
+              <%= image_tag 'glyphicons-151-edit', class: 'img-responsive' %>
+            <% end %>
+            <%= link_to admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <%= image_tag 'glyphicons-208-remove', class: 'img-responsive' %>
+            <% end %>
+          </div>
+        </td>
+    <% end %>
+  </table>
+</div>

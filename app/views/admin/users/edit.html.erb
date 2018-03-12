@@ -1,3 +1,6 @@
+<br/>
+<p>Modifier les infos de <%= @user.firstname %> <%= @user.lastname %></p>
+
 <%= simple_form_for @user, url: admin_user_path(@user) do |f| %>
   <%= render partial: '/shared/users/form', locals: { f: f } %>
   <%= f.submit 'Modifier', class: 'btn btn-primary' %>

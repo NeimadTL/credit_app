@@ -2,12 +2,31 @@
   <tr>
     <td><%= account.branch_code %></td>
     <td><%= account.sort_code %></td>
-    <td>
-      <%= link_to "#{account.account_number}", client_bank_account_path(account),
-        class: 'btn btn-primary btn-sm' %>
-    </td>
+    <td><%= account.account_number%></td>
     <td><%= account.rib_key %></td>
     <td><%= account.account_state.state %></td>
     <td><%= number_to_currency(account.balance, locale: "fr", precision: 2)  %></td>
+
+    <% if current_user.role.role_tid == Role::ADMIN_ROLE_TID %>
+      <td>
+        <% if account.account_state.state_tid == AccountState::PENDING_ACTIVATION_STATE_TID %>
+          <%= button_to admin_bank_account_path(account), method: :put, class: 'btn btn-primary btn-sm' do %>
+            <span>Activer ce compter</span>
+            <%= hidden_field_tag "bank_account[account_state_id]", AccountState::ACTIVE_STATE_TID %>
+          <% end %>
+        <% elsif account.account_state.state_tid == AccountState::ACTIVE_STATE_TID %>
+          <%= button_to admin_bank_account_path(account), method: :put, class: 'btn btn-danger btn-sm' do %>
+            <span>Fermer ce compte</span>
+            <%= hidden_field_tag "bank_account[account_state_id]", AccountState::CLOSED_STATE_TID %>
+          <% end %>
+        <% end %>
+      </td>
+    <% elsif current_user.role.role_tid == Role::CLIENT_ROLE_TID %>
+      <td>
+        <%= link_to client_bank_account_path(account) do %>
+          <%= image_tag 'glyphicons-52-eye-open', class: 'img-responsive' %>
+        <% end %>
+      </td>
+    <% end %>
   </tr>
 </tbody>

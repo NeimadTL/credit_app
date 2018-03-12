@@ -12,7 +12,7 @@
   <body>
 
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-      <a class="navbar-brand" href="#">CREDIT APP</a>
+      <a class="navbar-brand" href="<%= root_path %>">CREDIT APP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -62,16 +62,23 @@
       </div>
     </nav>
 
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
 
-    <% if notice.present? %>
-      <p class="text-success"><%= notice %></p>
-    <% end %>
+          <% if notice.present? %>
+            <p class="text-success"><%= notice %></p>
+          <% end %>
 
-  	<% if alert.present? %>
-      <p class="text-danger"><%= alert %></p>
-  	<% end %>
+        	<% if alert.present? %>
+            <p class="text-danger"><%= alert %></p>
+        	<% end %>
 
-    <%= yield %>
+          <%= yield %>
+
+        </div>
+      </div>
+    </div>
 
   </body>
 

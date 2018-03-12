@@ -10,10 +10,11 @@ class Admin::BankAccountsController < ApplicationController
 
     if @bank_account.valid?
       flash[:notice] = 'Compte mis à jour avec succès'
-      redirect_to admin_user_path @bank_account.user
+      # redirect_to admin_user_path @bank_account.user
     else
-      flash[:notice] = 'Une erreur est survenue'
+      flash[:alert] = 'Une erreur est survenue'
     end
+    redirect_to admin_user_path @bank_account.user
   end
 
   private

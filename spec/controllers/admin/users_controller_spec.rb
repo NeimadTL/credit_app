@@ -93,7 +93,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     it "with authorized logged in user and good params, returns http redirect" do
       admin.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
-      post :update, id: client.id,
+      put :update, id: client.id,
             user: {
               title: 'Mlle',
               firstname: 'Lauren',
@@ -118,7 +118,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     it "with authorized logged in user and bad params, returns http unprocessable_entity" do
       admin.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
-      post :update, id: client.id,
+      put :update, id: client.id,
             user: {
               title: nil,
               firstname: nil,
@@ -134,7 +134,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     it "with unauthorized logged in user, render 401 file" do
       admin.update_attributes(role_tid: Role::CLIENT_ROLE_TID)
-      get :update, id: client.id
+      put :update, id: client.id
       expect(response).to render_template(:file => "#{Rails.root}/public/401.html")
     end
 
@@ -145,7 +145,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       end
 
       it "returns http redirect" do
-        post :update, id: client.id,
+        put :update, id: client.id,
               user: {
                 title: 'Mlle',
                 firstname: 'Lauren',
@@ -211,20 +211,20 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     it "with authorized logged in user, returns http redirect" do
       admin.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
-      get :destroy, id: client.id
+      delete :destroy, id: client.id
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(admin_users_path)
     end
 
     it "with authorized logged in user and nonexistent resource, renders 404.html file" do
       admin.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
-      get :destroy, id: Random.new.rand(2000..3000)
+      delete :destroy, id: Random.new.rand(2000..3000)
       expect(response).to render_template(:file => "#{Rails.root}/public/404.html")
     end
 
     it "with unauthorized logged in user, renders 401.html file" do
       admin.update_attributes(role_tid: Role::CLIENT_ROLE_TID)
-      get :destroy, id: client.id
+      delete :destroy, id: client.id
       expect(response).to render_template(:file => "#{Rails.root}/public/401.html")
     end
 
@@ -236,7 +236,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       end
 
       it "returns http redirect" do
-        get :destroy, id: client.id
+        delete :destroy, id: client.id
         expect(response).to have_http_status(:redirect)
         expect(response).to redirect_to(new_user_session_path)
       end

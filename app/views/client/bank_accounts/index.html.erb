@@ -1,10 +1,6 @@
 <% @bank_accounts.each do |account| %>
-  Code banque : <%= account.branch_code %><br/>
-  Code Guichet : <%= account.sort_code %><br/>
-  Numéro de compte : <%= account.account_number %><br/>
-  Clé RIB : <%= account.rib_key %><br/>
-  Statut : <%= account.account_state.state %><br/>
-  Solde : <%= number_to_currency(account.balance, locale: "fr", precision: 2)  %><br/>
+  <%= render partial: '/shared/bank_accounts/bank_account_details', locals: { account: account} %>
+
   <%= link_to "Details compte", client_bank_account_path(account), class: 'btn btn-primary btn-sm' %>
   <br/><br/>
 <% end %>

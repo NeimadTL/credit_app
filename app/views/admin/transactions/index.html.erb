@@ -1,5 +1,10 @@
-Nombre de transactions en attente :
-<%= @transactions.where(transaction_state: TransactionState::PENDING_STATE_TID).count %>
+<br/>
+<button type="button" class="btn btn-primary btn-sm">
+  Transactions en attente
+  <span class="badge badge-light">
+    <%= @transactions.where(transaction_state: TransactionState::PENDING_STATE_TID).count %>
+  </span>
+</button>
 <br/><br/>
 
 <br/>

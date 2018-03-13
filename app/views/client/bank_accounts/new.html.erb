@@ -1,16 +1,16 @@
 <br/>
 <p>Saisissez les inforamtions du compte</p>
 <%= simple_form_for @bank_account, url: client_bank_accounts_path do |f| %>
-  <%= f.input :branch_code, label: false, placeholder: 'Code banque',
+  <%= f.input :branch_code, label: false, placeholder: 'Code banque (5 chiffres)',
       input_html: { class: 'form-control' } %>
   <br/>
-  <%= f.input :sort_code, label: false, placeholder: 'Code guichet',
+  <%= f.input :sort_code, label: false, placeholder: 'Code guichet (5 chiffres)',
       input_html: { class: 'form-control' } %>
   <br/>
-  <%= f.input :account_number, label: false, placeholder: 'Numéro de compte',
+  <%= f.input :account_number, label: false, placeholder: 'Numéro de compte (11 chiffres ou lettres)',
       input_html: { class: 'form-control' } %>
   <br/>
-  <%= f.input :rib_key, label: false, placeholder: 'Clé RIB',
+  <%= f.input :rib_key, label: false, placeholder: 'Clé RIB (2 chiffres)',
       input_html: { class: 'form-control' } %>
   <br/>
   <%= f.submit 'Créer', class: 'btn btn-primary' %>

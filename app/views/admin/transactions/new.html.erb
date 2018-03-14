@@ -10,7 +10,10 @@
   <br/><br/>
 
   <%= f.label :monthly_salary_range_id, "Statut", class: "form-check-label" %>
-  <%= f.collection_select :state_tid, TransactionState.all, :id, :state %>
+  <%= f.collection_select :state_tid,
+    TransactionState.all.reject { |state| state.state_tid == TransactionState::CANCELLED_STATE_TID },
+    :id, :state
+  %>
   <br/><br/>
 
   <%= f.label :value, "Montant", class: "form-check-label" %>

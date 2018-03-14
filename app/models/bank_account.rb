@@ -12,6 +12,18 @@ class BankAccount < ActiveRecord::Base
 
   after_create :setup_default_account_state
 
+  def is_active?
+    account_state_id == AccountState::ACTIVE_STATE_TID
+  end
+
+  def is_activation_pending?
+    account_state_id == AccountState::PENDING_ACTIVATION_STATE_TID
+  end
+
+  def is_closed?
+    account_state_id == AccountState::CLOSED_STATE_TID
+  end
+
   private
 
     def setup_default_account_state

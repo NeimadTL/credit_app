@@ -6,38 +6,35 @@ class TransactionManager
   end
 
   def execute_transaction
-    if @transaction.transaction_state.state_tid == TransactionState::VALIDATED_STATE_TID
-      if @transaction.transaction_type.eql? Transaction::CREDIT_TRANSACTION_TYPE
-        add_value_to_balance
-      else
-        substract_value_from_balance
-      end
+    if @transaction.is_credit_type?
+      credit_account
     end
   end
 
-
   private
 
-    def add_value_to_balance
-      balance = get_balance
+    def credit_account
+      bank_account = BankAccount.find(@transaction.bank_account_id)
+      raise_error_if_bank_account_is_pending_activation_or_closed(bank_account)
+      if @transaction.is_validated?
+        if bank_account.is_active?
+          increase_bank_account_balance(bank_account)
+        end
+      end
+    end
+
+    def increase_bank_account_balance(bank_account)
+      balance = bank_account.balance
       balance = balance + @transaction.value
-      update_balance(balance)
+      bank_account.update_attributes(balance: balance)
     end
 
-    def substract_value_from_balance
-      balance = get_balance
-      balance = balance - @transaction.value
-      update_balance(balance)
-    end
-
-    def get_balance
-      bank_account = BankAccount.find(@transaction.bank_account_id)
-      bank_account.balance
-    end
-
-    def update_balance(new_balance)
-      bank_account = BankAccount.find(@transaction.bank_account_id)
-      bank_account.update_attributes(balance: new_balance)
+    def raise_error_if_bank_account_is_pending_activation_or_closed(bank_account)
+      if bank_account.is_activation_pending?
+        raise BankAccountError.new('Account is pending activation')
+      elsif bank_account.is_closed?
+        raise BankAccountError.new('Account is closed')
+      end
     end
 
 

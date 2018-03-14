@@ -94,7 +94,8 @@ RSpec.describe Admin::TransactionsController, type: :controller do
       sign_in(user, nil)
     end
 
-    it "with authorized logged in user and good params, returns http redirect" do
+    it "with authorized logged in user, good params and ACTIVE bank account, returns http redirect" do
+      bank_account.update_attributes(account_state_id: AccountState::ACTIVE_STATE_TID)
       user.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
       post :create,
             transaction: {
@@ -114,6 +115,40 @@ RSpec.describe Admin::TransactionsController, type: :controller do
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(admin_transactions_path)
     end
+
+    it "with authorized logged in user, good params and PENDING ACTIVATION bank account,
+      renders :new and flashes error" do
+      bank_account.update_attributes(account_state_id: AccountState::PENDING_ACTIVATION_STATE_TID)
+      user.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
+      previous_count = Transaction.all.count
+      post :create,
+            transaction: {
+              transaction_type: Transaction::CREDIT_TRANSACTION_TYPE,
+              state_tid: TransactionState::VALIDATED_STATE_TID,
+              bank_account_id: bank_account.id,
+              value: 1000
+            }
+      expect(previous_count).to be == Transaction.all.count
+      expect(flash[:alert]).to match('Ce compte est en attente d\'activation')
+      expect(response).to render_template(:new)
+    end
+
+    it "with authorized logged in user, good params and CLOSED bank account, returns http redirect" do
+      bank_account.update_attributes(account_state_id: AccountState::CLOSED_STATE_TID)
+      user.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
+      previous_count = Transaction.all.count
+      post :create,
+            transaction: {
+              transaction_type: Transaction::CREDIT_TRANSACTION_TYPE,
+              state_tid: TransactionState::VALIDATED_STATE_TID,
+              bank_account_id: bank_account.id,
+              value: 1000
+            }
+      expect(previous_count).to be == Transaction.all.count
+      expect(flash[:alert]).to match('Ce compte est fermé')
+      expect(response).to render_template(:new)
+    end
+
 
     it "with authorized logged in user and bad params, returns http unprocessable_entity" do
       user.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
@@ -161,7 +196,9 @@ RSpec.describe Admin::TransactionsController, type: :controller do
       sign_in(user, nil)
     end
 
-    it "with authorized logged in user and good params, returns http redirect and flashes succes" do
+    it "with authorized logged in user and good params and ACTIVE bank account,
+      returns http redirect and flashes succes" do
+      bank_account.update_attributes(account_state_id: AccountState::ACTIVE_STATE_TID)
       user.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
       put :update, id: transaction.id, transaction: { state_tid: TransactionState::VALIDATED_STATE_TID }
       updated_transaction = Transaction.find(transaction.id)
@@ -171,6 +208,29 @@ RSpec.describe Admin::TransactionsController, type: :controller do
       expect(response).to redirect_to(admin_transactions_path)
     end
 
+    it "with authorized logged in user and good params and PENDING ACTIVATION bank account,
+      returns http redirect and flashes succes" do
+      bank_account.update_attributes(account_state_id: AccountState::PENDING_ACTIVATION_STATE_TID)
+      user.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
+      put :update, id: transaction.id, transaction: { state_tid: TransactionState::VALIDATED_STATE_TID }
+      non_updated_transaction = Transaction.find(transaction.id)
+      expect(non_updated_transaction.state_tid).to be == TransactionState::PENDING_STATE_TID
+      expect(flash[:alert]).to match('Ce compte est en attente d\'activation')
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(admin_transactions_path)
+    end
+
+    it "with authorized logged in user and good params and CLOSED bank account,
+      returns http redirect and flashes succes" do
+      bank_account.update_attributes(account_state_id: AccountState::CLOSED_STATE_TID)
+      user.update_attributes(role_tid: Role::ADMIN_ROLE_TID)
+      put :update, id: transaction.id, transaction: { state_tid: TransactionState::VALIDATED_STATE_TID }
+      non_updated_transaction = Transaction.find(transaction.id)
+      expect(non_updated_transaction.state_tid).to be == TransactionState::PENDING_STATE_TID
+      expect(flash[:alert]).to match('Ce compte est fermé')
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(admin_transactions_path)
+    end
 
     skip "with authorized logged in user and bad params, returns http redirect and flashes error" do
       user.update_attributes(role_tid: Role::ADMIN_ROLE_TID)

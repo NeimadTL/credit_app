@@ -33,9 +33,9 @@ class TransactionManager
 
     def raise_error_if_bank_account_is_pending_activation_or_closed(bank_account)
       if bank_account.is_activation_pending?
-        raise BankAccountError.new('Account is pending activation')
+        raise BankAccountError.new('Ce compte est en attente d\'activation')
       elsif bank_account.is_closed?
-        raise BankAccountError.new('Account is closed')
+        raise BankAccountError.new('Ce compte est fermé')
       end
     end
 

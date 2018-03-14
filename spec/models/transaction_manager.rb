@@ -12,7 +12,7 @@ RSpec.describe TransactionManager, type: :model do
 
   let(:bank_account) {
     BankAccount.create!(branch_code: "92833", sort_code: "02939", account_number: "9384927463Y",
-      rib_key: "26", user_id: user.id, balance: 200.0);
+      rib_key: "26", user_id: user.id, balance: 200.0, account_state_id:AccountState::PENDING_ACTIVATION_STATE_TID);
   }
 
   let(:transaction) {
@@ -21,10 +21,30 @@ RSpec.describe TransactionManager, type: :model do
   }
 
 
+  describe "when a transaction is passed to TransactionManager on a pending activation bank account" do
 
-  describe "when a validated credit or debit transaction is passed to TransactionManager" do
+    it "should raise a BankAccountError " do
+      message = 'Ce compte est en attente d\'activation'
+      expect { TransactionManager.new(transaction).execute_transaction }
+        .to raise_error(BankAccountError, message)
+    end
+  end
+
+  describe "when a transaction is passed to TransactionManager on a closed bank account" do
+
+    it "should raise a BankAccountError " do
+      bank_account.update_attributes(account_state_id: AccountState::CLOSED_STATE_TID)
+      message = 'Ce compte est fermé'
+      expect { TransactionManager.new(transaction).execute_transaction }
+        .to raise_error(BankAccountError, message)
+    end
+  end
+
+  describe "when a validated credit or debit transaction is passed to TransactionManager on a
+    active bank account" do
 
     it "account balance should be changed accordingly" do
+      bank_account.update_attributes(account_state_id: AccountState::ACTIVE_STATE_TID)
       TransactionManager.new(transaction).execute_transaction
       new_balance = BankAccount.find(transaction.bank_account_id).balance
       expect(new_balance).to be == 300
@@ -37,9 +57,11 @@ RSpec.describe TransactionManager, type: :model do
   end
 
 
-  describe "when a pending credit or debit transaction is passed to TransactionManager" do
+  describe "when a pending credit or debit transaction is passed to TransactionManager on a
+    acitive bank account" do
 
     it "account balance should not be changed" do
+      bank_account.update_attributes(account_state_id: AccountState::ACTIVE_STATE_TID)
       transaction.update_attributes(state_tid: TransactionState::PENDING_STATE_TID)
       TransactionManager.new(transaction).execute_transaction
       new_balance = BankAccount.find(transaction.bank_account_id).balance
@@ -53,9 +75,11 @@ RSpec.describe TransactionManager, type: :model do
   end
 
 
-  describe "when a cancelled credit or debit transaction is passed to TransactionManager" do
+  describe "when a cancelled credit or debit transaction is passed to TransactionManager on a
+    active bank account" do
 
     it "account balance should not be changed" do
+      bank_account.update_attributes(account_state_id: AccountState::ACTIVE_STATE_TID)
       transaction.update_attributes(state_tid: TransactionState::CANCELLED_STATE_TID)
       TransactionManager.new(transaction).execute_transaction
       new_balance = BankAccount.find(transaction.bank_account_id).balance

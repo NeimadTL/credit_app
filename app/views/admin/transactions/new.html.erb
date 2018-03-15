@@ -8,6 +8,10 @@
 
   <%= f.radio_button :transaction_type, Transaction::DEBIT_TRANSACTION_TYPE %>
   <%= f.label :transaction_type, t('.debit_radio_btn_label'), class: "form-check-label" %>
+
+  <% if @transaction.errors['transaction_type'].present? %>
+    <br/><span><%= @transaction.errors['transaction_type'][0] %></span>
+  <% end %>
   <br/><br/>
 
   <%= f.label :state_tid, t('.state_select_label'), class: "form-check-label" %>
@@ -15,15 +19,20 @@
     TransactionState.all.reject { |state| state.state_tid == TransactionState::CANCELLED_STATE_TID },
     :id, :state
   %>
-  <br/><br/>
+  <br/>
 
   <%= f.label :value, t('.value_label'), class: "form-check-label" %>
-  <%= f.number_field :value, class: 'form-control' %>
+  <%= f.input :value, label: false, input_html: { class: 'form-control' } %>
   <br/>
 
   <%= f.label :bank_account_id, t('.bank_account_label'), class: "form-check-label" %>
   <%= f.collection_select :bank_account_id, BankAccount.all, :id, :account_number %>
 
-  <br/><br/>
+  <br/>
   <%= f.submit t('.create_btn'), class: 'btn btn-primary' %>
+
 <% end %>
+
+<script type="text/javascript">
+  $("select").addClass("form-control");
+</script>

@@ -1,21 +1,21 @@
 <%= f.radio_button :title, "Mr" %>
-<%= f.label :title, "Mr", class: "form-check-label" %>
+<%= f.label :title, t('.mr_title_label'), class: "form-check-label" %>
 
 <%= f.radio_button :title, "Mme" %>
-<%= f.label :title, "Mme", class: "form-check-label" %>
+<%= f.label :title, t('.mrs_title_label'), class: "form-check-label" %>
 
 <%= f.radio_button :title, "Mlle" %>
-<%= f.label :title, "Mlle", class: "form-check-label" %>
+<%= f.label :title, t('.ms_title_label'), class: "form-check-label" %>
 
 <br><br>
-<%= f.text_field :firstname, placeholder: 'Nom', class: 'form-control' %>
+<%= f.text_field :firstname, placeholder: t('.firstname'), class: 'form-control' %>
 <br>
-<%= f.text_field :lastname, placeholder: 'Prénom', class: 'form-control' %>
+<%= f.text_field :lastname, placeholder: t('.lastname'), class: 'form-control' %>
 <br>
-<%= f.text_field :birthday, placeholder: 'Date de naissance (ex. 31/12/2017)', class: 'form-control' %>
+<%= f.text_field :birthday, placeholder: t('.birthday'), class: 'form-control' %>
 <br>
-<%= f.text_field :city, placeholder: 'Ville', class: 'form-control' %>
+<%= f.text_field :city, placeholder: t('.city'), class: 'form-control' %>
 <br>
-<%= f.label :monthly_salary_range_id, "Revenu mensuel", class: "form-check-label" %>
+<%= f.label :monthly_salary_range_id, t('.monthly_salary_range'), class: "form-check-label" %>
 <%= f.collection_select :monthly_salary_range_id, MonthlySalaryRange.all, :id, :range %>
 <br/><br/>

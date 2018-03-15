@@ -11,12 +11,12 @@
       <td>
         <% if account.account_state.state_tid == AccountState::PENDING_ACTIVATION_STATE_TID %>
           <%= button_to admin_bank_account_path(account), method: :put, class: 'btn btn-primary btn-sm' do %>
-            <span>Activer ce compter</span>
+            <span><%= t('.activated_bank_account_btn') %></span>
             <%= hidden_field_tag "bank_account[account_state_id]", AccountState::ACTIVE_STATE_TID %>
           <% end %>
         <% elsif account.account_state.state_tid == AccountState::ACTIVE_STATE_TID %>
           <%= button_to admin_bank_account_path(account), method: :put, class: 'btn btn-danger btn-sm' do %>
-            <span>Fermer ce compte</span>
+            <span><%= t('.close_bank_account_btn') %></span>
             <%= hidden_field_tag "bank_account[account_state_id]", AccountState::CLOSED_STATE_TID %>
           <% end %>
         <% end %>

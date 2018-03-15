@@ -1,23 +1,23 @@
 <br/>
 <button type="button" class="btn btn-primary btn-sm">
-  Nombre de clients <span class="badge badge-light"><%= @users.count %></span>
+  <%= t('.client_count') %> <span class="badge badge-light"><%= @users.count %></span>
 </button>
 
 <br/><br/><br/>
-<h3 class="text-center">Liste de clients</h3>
+<h3 class="text-center"><%= t('.user_list_page_title') %></h3>
 <br/>
 <div class="table-responsive-sm">
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Civilité</th>
-        <th scope="col">Prénom</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Date naissance</th>
-        <th scope="col">Email</th>
-        <th scope="col">Ville</th>
-        <th scope="col">Revenu mensuel</th>
-        <th scope="col">Actions</th>
+        <th scope="col"><%= t('.user_title_col_head') %></th>
+        <th scope="col"><%= t('.user_firstname_col_head') %></th>
+        <th scope="col"><%= t('.user_lastname_col_head') %></th>
+        <th scope="col"><%= t('.user_birthday_col_head') %></th>
+        <th scope="col"><%= t('.user_email_col_head') %></th>
+        <th scope="col"><%= t('.user_city_col_head') %></th>
+        <th scope="col"><%= t('.user_monthly_salary_range_col_head') %></th>
+        <th scope="col"><%= t('.user_actions_col_head') %></th>
       </tr>
     </thead>
     <% @users.each do |user| %>

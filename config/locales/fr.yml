@@ -242,10 +242,55 @@ fr:
         transaction_actions_col_head:               "Actions"
 
       new:
-        transaction_form_head_page: "Saisissez les informations de la transaction"
-        credit_radio_btn_label: "Crédit"
-        debit_radio_btn_label: "Débit"
-        state_select_label: "Statut"
-        value_label: "Montant"
-        bank_account_label: "Numéro de compte"
-        create_btn: 'Créer'
+        transaction_form_head_page:   "Saisissez les informations de la transaction"
+        credit_radio_btn_label:       "Crédit"
+        debit_radio_btn_label:        "Débit"
+        state_select_label:           "Statut"
+        value_label:                  "Montant"
+        bank_account_label:           "Numéro de compte"
+        create_btn:                   "Créer"
+
+    users:
+      edit:
+        user_edit_form_head_page:   "Modifier les infos de"
+        modify_btn:                 "Modifier"
+
+      index:
+        client_count:                         "Nombre de clients"
+        user_list_page_title:                 "Liste des clients"
+        user_title_col_head:                  "Civilité"
+        user_firstname_col_head:              "Prénom"
+        user_lastname_col_head:               "Nom"
+        user_birthday_col_head:               "Date naissance"
+        user_email_col_head:                  "Email"
+        user_city_col_head:                   "Ville"
+        user_monthly_salary_range_col_head:   "Revenu mensuel"
+        user_actions_col_head:                "Actions"
+
+      show:
+        bank_account_count:                 "Nombre de comptes"
+        bank_account_page_title:            "Liste des comptes de"
+        bank_account_branch_code_col_head:  "Code banque"
+        bank_account_sort_code_col_head:    "Code guichet"
+        bank_account_number_col_head:       "Numéro de compte"
+        bank_account_rib_key_col_head:      "Clé RIB"
+        bank_account_state_col_head:        "Statut"
+        bank_account_balance_col_head:      "Solde"
+        bank_account_actions_col_head:      "Actions"
+
+  shared:
+    users:
+      form:
+        mr_title_label:         "Mr"
+        mrs_title_label:        "Mme"
+        ms_title_label:         "Mlle"
+        firstname:              "Prénom"
+        lastname:               "Nom"
+        birthday:               "Date de naissance (ex. 31/12/2017)"
+        city:                   "Ville"
+        monthly_salary_range:   "Revenu mensuel"
+
+    bank_accounts:
+      bank_account_details:
+        activated_bank_account_btn:   "Activer ce compte"
+        close_bank_account_btn:       "Fermer ce compte"

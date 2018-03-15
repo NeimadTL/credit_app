@@ -1,5 +1,6 @@
 <br/>
 <h5><%= t('.transaction_form_head_page') %></h5>
+<br/>
 <%= simple_form_for @transaction, url: admin_transactions_path do |f| %>
 
   <%= f.radio_button :transaction_type, Transaction::CREDIT_TRANSACTION_TYPE %>

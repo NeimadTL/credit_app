@@ -1,7 +1,7 @@
 <br/>
-<p>Modifier les infos de <%= @user.firstname %> <%= @user.lastname %></p>
-
+<h5><%= t('.user_edit_form_head_page') %> <%= @user.title %> <%= @user.firstname %> <%= @user.lastname %></h5>
+<br/>
 <%= simple_form_for @user, url: admin_user_path(@user) do |f| %>
   <%= render partial: '/shared/users/form', locals: { f: f } %>
-  <%= f.submit 'Modifier', class: 'btn btn-primary' %>
+  <%= f.submit t('.modify_btn'), class: 'btn btn-primary' %>
 <% end %>

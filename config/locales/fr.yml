@@ -294,3 +294,33 @@ fr:
       bank_account_details:
         activated_bank_account_btn:   "Activer ce compte"
         close_bank_account_btn:       "Fermer ce compte"
+
+  client:
+    bank_accounts:
+      index:
+        bank_account_count:                 "Nombre de comptes"
+        bank_account_list_page_title:       "Mes comptes"
+        bank_account_count:                 "Nombre de comptes"
+        bank_account_page_title:            "Liste des comptes de"
+        bank_account_branch_code_col_head:  "Code banque"
+        bank_account_sort_code_col_head:    "Code guichet"
+        bank_account_number_col_head:       "Numéro de compte"
+        bank_account_rib_key_col_head:      "Clé RIB"
+        bank_account_state_col_head:        "Statut"
+        bank_account_balance_col_head:      "Solde"
+        bank_account_actions_col_head:      "Actions"
+
+      new:
+        bank_account_form_head_page:  "Saisissez les informations du compte"
+        bank_account_branch_code:     "Code banque (5 chiffres)"
+        bank_account_sort_code:       "Code guichet (5 chiffres)"
+        bank_account_number_code:     "Numéro de compte (11 chiffres ou lettres)"
+        bank_account_rib_key:         "Clé RIB (2 chiffres)"
+        create_btn:                   "Créer"
+
+      show:
+        transaction_list_page_title:        "Transactions du compte N°"
+        transaction_type_col_head:          "Type"
+        transaction_state_col_head:         "Statut"
+        transaction_created_at_col_head:    "Effectuée le"
+        transaction_value_col_head:         "Montant"

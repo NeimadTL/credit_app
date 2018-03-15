@@ -1,22 +1,22 @@
 <br/>
 <button type="button" class="btn btn-primary btn-sm">
-  Nombre de comptes <span class="badge badge-light"><%= @bank_accounts.count %></span>
+  <%= t('.bank_account_count') %> <span class="badge badge-light"><%= @bank_accounts.count %></span>
 </button>
 <br/><br/><br/>
 
-<h3 class="text-center"> Mes comptes</h3>
+<h3 class="text-center"><%= t('.bank_account_list_page_title') %></h3>
 <br/>
 <div class="table-responsive-sm">
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Code banque</th>
-        <th scope="col">Code guichet</th>
-        <th scope="col">Numéro de compte</th>
-        <th scope="col">Clé RIB</th>
-        <th scope="col">Statut</th>
-        <th scope="col">Solde</th>
-        <th scope="col">Actions</th>
+        <th scope="col"><%= t('.bank_account_branch_code_col_head') %></th>
+        <th scope="col"><%= t('.bank_account_sort_code_col_head') %></th>
+        <th scope="col"><%= t('.bank_account_number_col_head') %></th>
+        <th scope="col"><%= t('.bank_account_rib_key_col_head') %></th>
+        <th scope="col"><%= t('.bank_account_state_col_head') %></th>
+        <th scope="col"><%= t('.bank_account_balance_col_head') %></th>
+        <th scope="col"><%= t('.bank_account_actions_col_head') %></th>
       </tr>
     </thead>
     <% @bank_accounts.each do |account| %>

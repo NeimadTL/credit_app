@@ -1,17 +1,18 @@
 <br/>
-<p>Saisissez les inforamtions du compte</p>
+<h5><%= t('.bank_account_form_head_page') %></h5>
+<br/>
 <%= simple_form_for @bank_account, url: client_bank_accounts_path do |f| %>
-  <%= f.input :branch_code, label: false, placeholder: 'Code banque (5 chiffres)',
+  <%= f.input :branch_code, label: false, placeholder: t('.bank_account_branch_code'),
       input_html: { class: 'form-control' } %>
   <br/>
-  <%= f.input :sort_code, label: false, placeholder: 'Code guichet (5 chiffres)',
+  <%= f.input :sort_code, label: false, placeholder: t('.bank_account_sort_code'),
       input_html: { class: 'form-control' } %>
   <br/>
-  <%= f.input :account_number, label: false, placeholder: 'Numéro de compte (11 chiffres ou lettres)',
+  <%= f.input :account_number, label: false, placeholder: t('.bank_account_number_code'),
       input_html: { class: 'form-control' } %>
   <br/>
-  <%= f.input :rib_key, label: false, placeholder: 'Clé RIB (2 chiffres)',
+  <%= f.input :rib_key, label: false, placeholder: t('.bank_account_rib_key'),
       input_html: { class: 'form-control' } %>
   <br/>
-  <%= f.submit 'Créer', class: 'btn btn-primary' %>
+  <%= f.submit t('.create_btn'), class: 'btn btn-primary' %>
 <% end %>

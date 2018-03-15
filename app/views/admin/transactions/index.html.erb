@@ -1,26 +1,26 @@
 <br/>
 <button type="button" class="btn btn-primary btn-sm">
-  Transactions en attente
+  <%= t('.pending_transaction_count') %>
   <span class="badge badge-light">
     <%= @transactions.where(transaction_state: TransactionState::PENDING_STATE_TID).count %>
   </span>
 </button>
 <br/><br/><br/>
 
-<h3 class="text-center">Transactions effectuées</h3>
+<h3 class="text-center"><%= t('.transaction_list_page_title') %></h3>
 <br/>
 
 <div class="table-responsive-sm">
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Type</th>
-        <th scope="col">Statut</th>
-        <th scope="col">Effectué le</th>
-        <th scope="col">Montant</th>
-        <th scope="col">Client</th>
-        <th scope="col">Numéro de compte</th>
-        <th scope="col">Actions</th>
+        <th scope="col"><%= t('.transaction_type_col_head') %></th>
+        <th scope="col"><%= t('.transaction_state_col_head') %></th>
+        <th scope="col"><%= t('.transaction_created_at_col_head') %></th>
+        <th scope="col"><%= t('.transaction_value_col_head') %></th>
+        <th scope="col"><%= t('.transaction_client_col_head') %></th>
+        <th scope="col"><%= t('.transaction_bank_account_number_col_head') %></th>
+        <th scope="col"><%= t('.transaction_actions_col_head') %></th>
       </tr>
     </thead>
     <% @transactions.each do |transaction| %>

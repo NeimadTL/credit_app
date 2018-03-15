@@ -227,3 +227,25 @@ fr:
       sign_out:           "Se déconnecter"
       sign_in:            "Se connecter"
       sign_up:            "S\'inscrire"
+
+  admin:
+    transactions:
+      index:
+        pending_transaction_count:                  "Transactions en attente"
+        transaction_list_page_title:                "Transactions effectuées"
+        transaction_type_col_head:                  "Type"
+        transaction_state_col_head:                 "Statut"
+        transaction_created_at_col_head:            "Effectuée le"
+        transaction_value_col_head:                 "Montant"
+        transaction_client_col_head:                "Client"
+        transaction_bank_account_number_col_head:   "Numéro de compte"
+        transaction_actions_col_head:               "Actions"
+
+      new:
+        transaction_form_head_page: "Saisissez les informations de la transaction"
+        credit_radio_btn_label: "Crédit"
+        debit_radio_btn_label: "Débit"
+        state_select_label: "Statut"
+        value_label: "Montant"
+        bank_account_label: "Numéro de compte"
+        create_btn: 'Créer'

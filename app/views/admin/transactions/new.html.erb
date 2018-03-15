@@ -1,28 +1,28 @@
 <br/>
-<p>Saisissez les inforamtions de la transaction</p>
+<h5><%= t('.transaction_form_head_page') %></h5>
 <%= simple_form_for @transaction, url: admin_transactions_path do |f| %>
 
-  <%= f.radio_button :transaction_type, "Crédit" %>
-  <%= f.label :transaction_type, "Crédit", class: "form-check-label" %>
+  <%= f.radio_button :transaction_type, Transaction::CREDIT_TRANSACTION_TYPE %>
+  <%= f.label :transaction_type, t('.credit_radio_btn_label'), class: "form-check-label" %>
 
-  <%= f.radio_button :transaction_type, "Débit" %>
-  <%= f.label :transaction_type, "Débit", class: "form-check-label" %>
+  <%= f.radio_button :transaction_type, Transaction::DEBIT_TRANSACTION_TYPE %>
+  <%= f.label :transaction_type, t('.debit_radio_btn_label'), class: "form-check-label" %>
   <br/><br/>
 
-  <%= f.label :monthly_salary_range_id, "Statut", class: "form-check-label" %>
+  <%= f.label :state_tid, t('.state_select_label'), class: "form-check-label" %>
   <%= f.collection_select :state_tid,
     TransactionState.all.reject { |state| state.state_tid == TransactionState::CANCELLED_STATE_TID },
     :id, :state
   %>
   <br/><br/>
 
-  <%= f.label :value, "Montant", class: "form-check-label" %>
+  <%= f.label :value, t('.value_label'), class: "form-check-label" %>
   <%= f.number_field :value, class: 'form-control' %>
   <br/>
 
-  <%= f.label :bank_account_id, "Numéro de compte", class: "form-check-label" %>
+  <%= f.label :bank_account_id, t('.bank_account_label'), class: "form-check-label" %>
   <%= f.collection_select :bank_account_id, BankAccount.all, :id, :account_number %>
 
   <br/><br/>
-  <%= f.submit 'Créer', class: 'btn btn-primary' %>
+  <%= f.submit t('.create_btn'), class: 'btn btn-primary' %>
 <% end %>

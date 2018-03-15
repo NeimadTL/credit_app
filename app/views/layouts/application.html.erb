@@ -43,17 +43,17 @@
 
         <% if user_signed_in? %>
           <% if current_user.role.role_tid == Role::CLIENT_ROLE_TID %>
-            <%= link_to 'Mes comptes', client_bank_accounts_path, class: 'nav-link' %>
-            <%= link_to 'Nouveau compte', new_client_bank_account_path, class: 'nav-link' %>
+            <%= link_to t('.my_bank_accounts'), client_bank_accounts_path, class: 'nav-link' %>
+            <%= link_to t('.new_bank_account'), new_client_bank_account_path, class: 'nav-link' %>
           <% elsif current_user.role.role_tid == Role::ADMIN_ROLE_TID %>
-            <%= link_to 'Voir les transactions', admin_transactions_path, class: 'nav-link' %>
-            <%= link_to 'Nouvelle transaction', new_admin_transaction_path, class: 'nav-link' %>
-            <%= link_to 'Gérer les clients', admin_users_path, class: 'nav-link' %>
+            <%= link_to t('.show_transactions'), admin_transactions_path, class: 'nav-link' %>
+            <%= link_to t('.new_transaction'), new_admin_transaction_path, class: 'nav-link' %>
+            <%= link_to t('.manager_clients'), admin_users_path, class: 'nav-link' %>
           <% end %>
-          <%= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          <%= link_to t('.sign_out'), destroy_user_session_path, method: :delete, class: 'nav-link' %>
         <% else %>
-          <%= link_to 'Se connecter', new_user_session_path, class: 'nav-link' %>
-          <%= link_to 'S\'inscrire', new_user_registration_path, class: 'nav-link' %>
+          <%= link_to t('.sign_in'), new_user_session_path, class: 'nav-link' %>
+          <%= link_to t('.sign_up'), new_user_registration_path, class: 'nav-link' %>
         <% end %>
         <!-- <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

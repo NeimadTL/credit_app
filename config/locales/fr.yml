@@ -215,3 +215,15 @@ fr:
       long: "%A %d %B %Y %Hh%M"
       short: "%d %b %Hh%M"
     pm: pm
+
+
+  layouts:
+    application:
+      my_bank_accounts:   "Mes comptes"
+      new_bank_account:   "Nouveau compte"
+      show_transactions:  "Voir les transactions"
+      new_transaction:    "Nouvelle transaction"
+      manager_clients:    "Gérer les clients"
+      sign_out:           "Se déconnecter"
+      sign_in:            "Se connecter"
+      sign_up:            "S\'inscrire"

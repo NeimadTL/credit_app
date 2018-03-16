@@ -19,3 +19,7 @@
 <%= f.label :monthly_salary_range_id, t('.monthly_salary_range'), class: "form-check-label" %>
 <%= f.collection_select :monthly_salary_range_id, MonthlySalaryRange.all, :id, :range %>
 <br/><br/>
+
+<script type="text/javascript">
+  $("select").addClass("form-control");
+</script>

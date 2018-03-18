@@ -3,7 +3,7 @@
 <br/>
 <%= simple_form_for @transaction, url: admin_transactions_path do |f| %>
 
-  <%= f.radio_button :transaction_type, Transaction::CREDIT_TRANSACTION_TYPE %>
+  <%= f.radio_button :transaction_type, Transaction::CREDIT_TRANSACTION_TYPE, checked: true %>
   <%= f.label :transaction_type, t('.credit_radio_btn_label'), class: "form-check-label" %>
 
   <%= f.radio_button :transaction_type, Transaction::DEBIT_TRANSACTION_TYPE %>
@@ -34,5 +34,30 @@
 <% end %>
 
 <script type="text/javascript">
+
   $("select").addClass("form-control");
+
+
+  $('#new_transaction').validate({
+
+    highlight: function(element) {
+      jQuery(element).closest('.form-control').addClass('is-invalid');
+    },
+    unhighlight: function(element) {
+      jQuery(element).closest('.form-control').removeClass('is-invalid');
+    },
+    errorElement: 'div',
+    errorClass: 'invalid-feedback',
+
+    rules: {
+      'transaction[value]': { required: true, number: true }
+    },
+    messages: {
+      'transaction[value]': {
+        required: "Saisissez le montant de la transaction",
+        number: "Le montant ne peut contenir que des chiffres"
+      }
+    }
+  });
+
 </script>

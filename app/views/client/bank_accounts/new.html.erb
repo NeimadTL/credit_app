@@ -28,6 +28,15 @@
 
 
   $('#new_bank_account').validate({
+
+    highlight: function(element) {
+      jQuery(element).closest('.form-control').addClass('is-invalid');
+    },
+    unhighlight: function(element) {
+      jQuery(element).closest('.form-control').removeClass('is-invalid');
+    },
+    errorElement: 'div',
+    errorClass: 'invalid-feedback',
     rules: {
       'bank_account[branch_code]': { required: true, number: true, minlength: 5, maxlength: 5 },
       'bank_account[sort_code]': { required: true, number: true, minlength: 5, maxlength: 5 },

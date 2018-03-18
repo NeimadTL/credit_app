@@ -29,7 +29,9 @@
           <td><%= transaction.transaction_type %></td>
           <td><%= transaction.transaction_state.state %></td>
           <td><%= DateTime.parse(transaction.created_at.to_s).strftime('%A %B %d %H:%M') %></td>
-          <td><%= number_to_currency(transaction.value, locale: "fr", precision: 2) %></td>
+          <td>
+            <%= render partial: '/shared/transactions/transaction_value', locals: { transaction: transaction } %>
+          </td>
           <td><%= transaction.bank_account.user.firstname %> <%= transaction.bank_account.user.lastname %></td>
           <td><%= transaction.bank_account.account_number %></td>
           <td>

@@ -18,7 +18,9 @@
           <td><%= transaction.transaction_type %></td>
           <td><%= transaction.transaction_state.state %></td>
           <td><%= DateTime.parse(transaction.created_at.to_s).strftime('%A %B %d %H:%M') %></td>
-          <td><%= number_to_currency(transaction.value, locale: "fr", precision: 2) %></td>
+          <td>
+            <%= render partial: '/shared/transactions/transaction_value', locals: { transaction: transaction } %>
+          </td>
         </tr>
       </tbody>
     <% end %>

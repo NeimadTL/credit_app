@@ -1,0 +1,9 @@
+<% if transaction.is_credit_type? %>
+  <div class="text-success">
+    +<%= number_to_currency(transaction.value, locale: "fr", precision: 2) %>
+  </div>
+<% elsif transaction.is_debit_type? %>
+  <div class="text-danger">
+    -<%= number_to_currency(transaction.value, locale: "fr", precision: 2) %>
+  </div>
+<% end %>

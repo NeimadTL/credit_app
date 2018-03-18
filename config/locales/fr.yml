@@ -286,7 +286,7 @@ fr:
         ms_title_label:         "Mlle"
         firstname:              "Prénom"
         lastname:               "Nom"
-        birthday:               "Date de naissance (ex. 31/12/2017)"
+        birthday:               "Date de naissance (jj/mm/aaaa)"
         city:                   "Ville"
         monthly_salary_range:   "Revenu mensuel"
 

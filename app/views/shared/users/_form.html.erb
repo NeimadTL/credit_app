@@ -22,4 +22,59 @@
 
 <script type="text/javascript">
   $("select").addClass("form-control");
+
+  /*** validations only for sign up page ***/
+  
+  $.validator.addMethod("frenchDateFormat", function (value, element) {
+    return this.optional(element) || /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/i.test(value);
+  }, "Please enter letters and numbers only.");
+
+  $('#new_user').validate({
+
+    highlight: function(element) {
+      jQuery(element).closest('.form-control').addClass('is-invalid');
+    },
+    unhighlight: function(element) {
+      jQuery(element).closest('.form-control').removeClass('is-invalid');
+    },
+    errorElement: 'div',
+    errorClass: 'invalid-feedback',
+    rules: {
+      'user[firstname]': { required: true },
+      'user[lastname]': { required: true },
+      'user[birthday]': { required: true, frenchDateFormat: true },
+      'user[city]': { required: true },
+      'user[email]': { required: true, email: true },
+      'user[password]': { required: true, minlength: 6 },
+      'user[password_confirmation]': { required: true, minlength: 6 }
+    },
+    messages: {
+      'user[firstname]': {
+        required: "Saisissez votre prénom",
+      },
+      'user[lastname]': {
+        required: "Saisissez votre nom",
+      },
+      'user[birthday]': {
+        required: "Saisissez votre date de naissance",
+        frenchDateFormat: "La date de naissance de naissance n'est pas au bon format (jj/mm/aaaa)",
+      },
+      'user[city]': {
+        required: "Saisissez votre ville",
+      },
+      'user[email]': {
+        required: "Saisissez votre email",
+        email: "Cet email est invalide"
+      },
+      'user[password]': {
+        required: "Saisissez votre mot de passe",
+        minlength: "Le mot de passe doit être sur 6 caractères minimum"
+      },
+      'user[password_confirmation]': {
+        required: "Saisissez votre mot de passe de confirmation",
+        minlength: "Le mot de passe de confirmation doit être sur 6 caractères minimum"
+      },
+    }
+  });
+
 </script>

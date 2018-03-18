@@ -16,3 +16,48 @@
   <br/>
   <%= f.submit t('.create_btn'), class: 'btn btn-primary' %>
 <% end %>
+
+
+
+<script type="text/javascript">
+
+  // extra method for matching 11 eleven number or letters for bank account number
+  $.validator.addMethod("elevenlettersOrNumbersOnly", function (value, element) {
+    return this.optional(element) || /^[a-zA-Z0-9]{11}$/i.test(value);
+  }, "Please enter letters and numbers only.");
+
+
+  $('#new_bank_account').validate({
+    rules: {
+      'bank_account[branch_code]': { required: true, number: true, minlength: 5, maxlength: 5 },
+      'bank_account[sort_code]': { required: true, number: true, minlength: 5, maxlength: 5 },
+      'bank_account[account_number]': { required: true,  elevenlettersOrNumbersOnly: true },
+      'bank_account[rib_key]': { required: true,  number: true, minlength: 2, maxlength: 2 }
+    },
+    messages: {
+      'bank_account[branch_code]': {
+        required: "Saisissez votre code banque",
+        number: "Le code banque ne peut contenir des chiffres",
+        minlength: "Le code banque doit avoir 5 chiffres",
+        maxlength: "Le code banque ne peut pas excéder plus 5 chiffres"
+      },
+      'bank_account[sort_code]': {
+        required: "Saisissez votre code guichet",
+        number: "Le code guichet ne peut contenir des chiffres",
+        minlength: "Le code guichet doit avoir 5 chiffres",
+        maxlength: "Le code guichet ne peut pas excéder plus 5 chiffres"
+      },
+      'bank_account[account_number]': {
+        required: "Saisissez votre numéro de compte",
+        elevenlettersOrNumbersOnly: "Le numéro de compte n'est pas au bon format (11 chiffres ou lettres)"
+      },
+      'bank_account[rib_key]': {
+        required: "Saisissez votre clé RIB",
+        number: "La clé RIB ne peut contenir des chiffres",
+        minlength: "La clé RIB doit avoir 2 chiffres",
+        maxlength: "La clé RIB ne peut pas excéder plus 2 chiffres"
+      }
+    }
+  });
+
+</script>

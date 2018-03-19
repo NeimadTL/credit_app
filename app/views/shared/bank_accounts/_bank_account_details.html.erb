@@ -26,7 +26,66 @@
         <%= link_to client_bank_account_path(account) do %>
           <%= image_tag 'glyphicons-52-eye-open', class: 'img-responsive' %>
         <% end %>
+        <%= link_to'#', onclick: "printRIB('#{account.branch_code}', '#{account.sort_code}',
+          '#{account.account_number}', '#{account.rib_key}', '#{account.user.title}',
+          '#{account.user.firstname}', '#{account.user.lastname}', '#{account.user.city}')" do %>
+          <%= image_tag 'glyphicons-16-print', class: 'img-responsive' %>
+        <% end %>
       </td>
     <% end %>
   </tr>
 </tbody>
+
+<script type="text/javascript">
+
+  function printRIB(branchCode, sortCode, accountNumber, ribKey, userTitle,
+    userFirstname, userLastname, userCity)
+  {
+    var win = window.open();
+    self.focus();
+    win.document.open();
+    win.document.write('<'+'html'+'><'+'body'+'>');
+    win.document.write('<'+'table border=\"1\"'+'><'+'tr'+'>');
+    win.document.write('<'+'thead'+'><'+'tr'+'>');
+    win.document.write('<'+'th'+'>');
+    win.document.write('Code Banque');
+    win.document.write('<'+'/th'+'>');
+    win.document.write('<'+'th'+'>');
+    win.document.write('Code Guichet');
+    win.document.write('<'+'/th'+'>');
+    win.document.write('<'+'th'+'>');
+    win.document.write('Numéro de compte');
+    win.document.write('<'+'/th'+'>');
+    win.document.write('<'+'th'+'>');
+    win.document.write('clé RIB');
+    win.document.write('<'+'/th'+'>');
+    win.document.write('<'+'/tr'+'><'+'/thead'+'>');
+    win.document.write('<'+'td'+'>');
+    win.document.write(branchCode);
+    win.document.write('<'+'/td'+'>');
+    win.document.write('<'+'td'+'>');
+    win.document.write(sortCode);
+    win.document.write('<'+'/td'+'>');
+    win.document.write('<'+'td'+'>');
+    win.document.write(accountNumber);
+    win.document.write('<'+'/td'+'>');
+    win.document.write('<'+'td'+'>');
+    win.document.write(ribKey);
+    win.document.write('<'+'/td'+'>');
+    win.document.write('<'+'/tr'+'><'+'/table'+'>');
+    win.document.write('<'+'p'+'>');
+    win.document.write('Titulaire : ');
+    win.document.write(userTitle);
+    win.document.write(' ');
+    win.document.write(userFirstname);
+    win.document.write(' ');
+    win.document.write(userLastname);
+    win.document.write(', ');
+    win.document.write(userCity);
+    win.document.write('<'+'/p'+'>');
+    win.document.write('<'+'/body'+'><'+'/html'+'>');
+    win.document.close();
+    win.print();
+  }
+
+</script>
